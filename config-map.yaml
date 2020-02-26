@@ -158,13 +158,3 @@ data:
             names:
             - 'cnrm-system'
 
-      - job_name: 'config-connector-stats'
-        kubernetes_sd_configs:
-        - role: pod
-          namespaces:
-            names:
-            - 'cnrm-system'
-        relabel_configs:
-        - action: replace
-          target_label: '__meta_kubernetes_pod_container_port_number'
-          replacement: '8888'
