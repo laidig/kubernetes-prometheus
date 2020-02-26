@@ -150,3 +150,21 @@ data:
         - source_labels: [__meta_kubernetes_service_name]
           action: replace
           target_label: kubernetes_name
+
+      - job_name: 'config-connector-service'
+        kubernetes_sd_configs:
+        - role: service
+          namespaces:
+            names:
+            - 'cnrm-system'
+
+      - job_name: 'config-connector-stats'
+        kubernetes_sd_configs:
+        - role: pod
+          namespaces:
+            names:
+            - 'cnrm-system'
+        relabel_configs:
+        - action: replace
+          target_label: '__meta_kubernetes_pod_container_port_number'
+          replacement: '8888'
